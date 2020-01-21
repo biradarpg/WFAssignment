@@ -24,12 +24,7 @@ public class Book  {
 		return (price+tax)*quantity ;
 	}
 	
-	 public boolean isTaxed(){
-		 return isTaxed;
-	 }
-	public boolean isImported() {
-		return isImported;
-	}
+	
 	
 	
 	

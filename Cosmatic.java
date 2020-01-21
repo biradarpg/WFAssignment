@@ -16,4 +16,12 @@ public class Cosmatic {
 		this.quantity=quantity;
 		this.itemDescription=itemDescription;
 	}	
+    
+TaxCalculator taxCal=new TaxCalculator();
+	
+	public double getTotalPrice() {
+		double tax=taxCal.getCalculatedTax(isTaxed, isImported, price);
+		
+		return (price+tax)*quantity ;
+	}
 }

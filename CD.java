@@ -18,7 +18,13 @@ public class CD  {
 		this.isImported=isImported;
 	}
     
+TaxCalculator taxCal=new TaxCalculator();
 	
+	public double getTotalPrice() {
+		double tax=taxCal.getCalculatedTax(isTaxed, isImported, price);
+		
+		return (price+tax)*quantity ;
+	}
 	
 
 }
