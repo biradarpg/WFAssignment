@@ -1,76 +1,65 @@
 package com.retail;
 
-
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Cart {
-
-private int itemCount;
-private double totalPrice;
-private static int capacity;
-private static Item[] cart = new Item[capacity];
-
-ArrayList<Book> bks=new ArrayList<Book>();
- 
-public Cart(){
-    itemCount = 10;
-    totalPrice = 0.0;
-    capacity = 0;
-}
- 
-
-
-public void add(int itemID, String itemName, double itemPrice, String itemDescription, int itemQuantity, double itemTax){
-    Item item = new Item(itemID, itemName, itemPrice, itemDescription, itemQuantity, itemTax);
-    totalPrice += (itemPrice * itemQuantity);
-    cart[itemCount] = item;
-    itemCount += 1;
-     Book bk = new Book(itemQuantity, itemTax, itemQuantity, itemDescription);
-     bks.add(bk);
-    if(itemCount==capacity)
-    {
-        increaseSize();
-    }
-}
-
-public void addBooks(Book books) {
-	books.getTotalPrice();
-}
-
-public static void remove(String itemName){
-    Scanner s = new Scanner(System.in);
-
-    for (int i = 0; i < cart.length; i++) {
-        Item remove = (Item) cart.get(i);
-        if (itemName.equals(remove.getName())) {
-            cart.remove(i);
-
-        }
-    }
-    System.out.println("\n" + "Item " + itemName + " wasn't found.");
-}
-
-private void increaseSize()
-{
-    Item[] item = new Item[capacity+5];
-    for(int i=0; i < capacity; i++)
-    {
-        item[i] = cart[i];
-    }
-    cart = item; 
-    item = null;
-    capacity = cart.length;
-}
-
-public static void prLine (int itemID, String itemName, int itemQuantity, double itemPrice, double total, double itemTax) {
-    System.out.printf("\n%-10.10d %30s %10.2f %10d %10.2f", itemID, itemName, itemPrice, itemQuantity, itemTax, total);
-}   
-
-public static void prTitles () {
-    System.out.printf("\n%-10s 30% %10s %10s %10s %10s", "ID", "Item", "Price", "Quantity", "Tax", "Total");
-}
-
-
+	
+	ArrayList<Book> books=new ArrayList<Book>();
+	ArrayList<Cosmatic> cosmatics=new ArrayList<Cosmatic>();
+	ArrayList<CD> cds=new ArrayList<CD>();
+	
+	public void add(Book b) {
+		books.add(b);
+		
+	}
+	
+	public void add(Cosmatic cos) {
+		cosmatics.add(cos);
+		
+	}
+	
+	public void add(CD cd) {
+		cds.add(cd);
+		
+	}
+	
+	public double getTotalBookAmount() {
+		double amount=0.0;
+		for (Book book : books) {
+			amount+=book.getTotalPrice();				
+		}
+		return amount;
+	}
+	
+	public double getTotalCosmaticAmount() {
+		double amount=0.0;
+		for (Cosmatic cosmatics : cosmatics) {
+			amount=cosmatics.getTotalPrice();
+		}
+		return amount;
+	}
+	
+	public double getTotalCDAmount() {
+		double amount=0.0;
+		for (CD cd : cds) {
+			amount=cd.getTotalPrice();
+		}
+		return amount;
+	}
+	public double totalOfAllGoods() {
+		
+								
+		double grandTotal =getTotalBookAmount()+getTotalCosmaticAmount()+getTotalCDAmount();
+		return grandTotal;
+	}
+public void display() {
+		
+		System.out.println("The Shping Details ...................");
+		System.out.println("total Amount of Books "+getTotalBookAmount());
+		System.out.println("total Amount of Cosmatics "+getTotalCosmaticAmount());
+		System.out.println("total Amount of CD "+getTotalCDAmount());
+		System.out.println("Grand total Amount of All product "+totalOfAllGoods());
+		
+	}
 
 }
